@@ -19,7 +19,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowRazorApp", policy =>
     {
-        policy.WithOrigins( "http://127.0.0.1:5500/")
+        policy.WithOrigins("https://localhost:5500", "http://localhost:7286")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
