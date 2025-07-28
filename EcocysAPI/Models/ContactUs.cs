@@ -15,7 +15,7 @@ namespace EcocysAPI.Models
         [StringLength(50)]
         public string LastName { get; set; }
 
-        [Required, Phone, StringLength(15)]
+        [Required, Phone, StringLength(10)]
         public string ContactNumber { get; set; }
 
         [Required, StringLength(250)]
