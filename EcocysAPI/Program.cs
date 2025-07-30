@@ -11,20 +11,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("dbcs")));
 
-// ✅ Allow requests from your Razor page (127.0.0.1:5500)
-builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost",
-        policy => policy
-            .WithOrigins("http://127.0.0.1:5500", "http://localhost:5500") 
-            .AllowAnyHeader()
-            .AllowAnyMethod());
+    options.AddPolicy("AllowRazorApp", policy =>
+    {
+        policy.WithOrigins("https://localhost:7286") 
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
 });
 
 var app = builder.Build();
 
-// Use middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -33,8 +31,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// ✅ Enable CORS
-app.UseCors("AllowLocalhost");
+app.UseCors("AllowRazorApp");
 
 app.UseAuthorization();
 
