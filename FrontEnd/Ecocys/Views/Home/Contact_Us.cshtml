@@ -1,0 +1,262 @@
+﻿@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var form = document.getElementById("contactForm");
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault(); 
+
+                var formData = {
+                    CompanyName: form.CompanyName.value,
+                    FirstName: form.FirstName.value,
+                    LastName: form.LastName.value,
+                    ContactNumber: form.ContactNumber.value,
+                    Address: form.Address.value,
+                    BusinessType: form.BusinessType.value,
+                    ProductShoot: form.ProductShoot.value,
+                    SellOnline: form.SellOnline.value,
+                    ProblemStatement: form.ProblemStatement.value
+                };
+
+                fetch("https://localhost:7195/api/Home", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert("Form submitted successfully!");
+                    form.reset();
+                })
+                .catch(error => {
+                    console.error("Error submitting form:", error);
+                    alert("There was an error submitting the form.");
+                });
+            });
+        });
+    </script>
+}
+
+
+
+
+<div class="container-fluid bg-breadcrumb">
+    <div class="container text-center py-5" style="max-width: 900px;">
+        <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Contact Us</h4>
+        <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active text-primary">Contact Us</li>
+        </ol>
+    </div>
+</div>
+
+
+
+<div class="container-fluid contact bg-light py-5">
+    <div class="container py-5">
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-5 wow fadeInLeft" data-wow-delay="0.2s">
+                <h1 class="display-4 mb-4 wow fadeInUp" data-wow-delay="0.3s">Get In Touch</h1>
+                <p class="mb-4 lead wow fadeInUp" data-wow-delay="0.4s">
+                    We're here to help you grow your business...
+                </p>
+
+                <div class="row g-4 mt-4">
+                    <div class="col-12 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="contact-info p-4 border rounded bg-white">
+                            <div class="d-flex align-items-start">
+                                <div class="contact-icon me-3 text-primary">
+                                    <i class="fas fa-map-marker-alt fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h4 class="mb-2"><strong>Our Location</strong></h4>
+                                    <p class="mb-0">
+                                        8B, Industrial Area, Phase 8B<br>Mohali, Punjab 160055<br>
+                                        <a href="#map-section" class="text-primary">View on map</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="contact-info p-4 border rounded bg-white h-100">
+                            <div class="contact-icon mb-3 text-primary">
+                                <i class="fas fa-phone-alt fa-2x"></i>
+                            </div>
+                            <h4 class="mb-2"><strong>Call Us</strong></h4>
+                            <p class="mb-1">+91 XXXXX XXXXX</p>
+                            <p class="mb-0">+91 XXXXX XXXXX</p>
+                            <small class="text-muted">Mon-Fri, 11am-8pm</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                        <div class="contact-info p-4 border rounded bg-white h-100">
+                            <div class="contact-icon mb-3 text-primary">
+                                <i class="fas fa-envelope fa-2x"></i>
+                            </div>
+                            <h4 class="mb-2"><strong>Email Us</strong></h4>
+                            <p class="mb-1">info@ecocys.com</p>
+                            <p class="mb-0">support@ecocys.com</p>
+                            <small class="text-muted">Response within 24 hours</small>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-12 wow fadeInUp mt-4" data-wow-delay="0.8s">
+                        <div class="p-4 border rounded bg-white">
+                            <div class="d-flex align-items-center">
+                                <img src="~/img/testimonial-1.jpg" class="rounded-circle me-3" width="60" alt="Client">
+                                <div>
+                                    <p class="mb-1 fst-italic">"Ecocys transformed our retail business with their manufacturer network. Highly recommended!"</p>
+                                    <div class="text-warning">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    </div>
+                                    <strong>- Rajesh Kumar, Delhi</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           
+
+
+            <div class="col-md-6 col-lg-7 wow fadeInRight" data-wow-delay="0.3s">
+                <div class="bg-white p-4 p-lg-5 rounded shadow wow fadeInUp" data-wow-delay="0.4s">
+                    <h1 class="mb-4 text-center wow fadeInDown" data-wow-delay="0.5s">Business Registration Form</h1>
+
+
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label>Company/Firm Name</label>
+                            <input type="text" name="CompanyName" class="form-control" required />
+                        </div>
+
+                        <div class="form-row row">
+                            <div class="form-group col-md-6 col-12">
+                                <label>First Name</label>
+                                <input type="text" name="FirstName" class="form-control" required />
+                            </div>
+                            <div class="form-group col-md-6 col-12">
+                                <label>Last Name</label>
+                                <input type="text" name="LastName" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Contact Number</label>
+                            <input type="tel" name="ContactNumber" class="form-control" pattern="[6-9]{1}[0-9]{9}" maxlength="10" inputmode="numeric" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Address</label>
+                            <textarea name="Address" class="form-control" rows="2" required></textarea>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label mt-2">Are you a?</label>
+                            <div class="col-md-10 mt-2">
+                                <select name="BusinessType" class="form-control text-center form-control-sm" required>
+                                    <option disabled selected>-- Select --</option>
+                                    <option>Manufacturer</option>
+                                    <option>State Wholeseller</option>
+                                    <option>Retailer</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <label class="col-md-5 col-form-label">Product Shoot</label>
+                            <div class="col-md-6">
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="ProductShoot" value="Yes" /> Yes
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="ProductShoot" value="No" /> No
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <label class="col-md-5 col-form-label">Want to sell online?</label>
+                            <div class="col-md-6">
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="SellOnline" value="Yes" /> Yes
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="SellOnline" value="No" /> No
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Problem Statement</label>
+                            <textarea name="ProblemStatement" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                        </div>
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact End -->
+
+<!-- Stats Section -->
+<div class="container-fluid bg-primary stats py-5 text-white">
+    <div class="container py-3">
+        <div class="row g-4 text-center">
+            <div class="col-6 col-md-3 wow fadeIn" data-wow-delay="0.1s">
+                <div class="p-3">
+                    <h2 class="display-4 mb-0" data-toggle="counter-up">1250</h2>
+                    <p class="mb-0">Happy Retailers</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 wow fadeIn" data-wow-delay="0.3s">
+                <div class="p-3">
+                    <h2 class="display-4 mb-0" data-toggle="counter-up">215</h2>
+                    <p class="mb-0">Manufacturers</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 wow fadeIn" data-wow-delay="0.5s">
+                <div class="p-3">
+                    <h2 class="display-4 mb-0" data-toggle="counter-up">1850</h2>
+                    <p class="mb-0">Products Listed</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 wow fadeIn" data-wow-delay="0.7s">
+                <div class="p-3">
+                    <h2 class="display-4 mb-0" data-toggle="counter-up">24</h2>
+                    <p class="mb-0">Hours Support</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Map Section -->
+<div class="container-fluid p-0" id="map-section">
+    <div class="map wow fadeInUp" data-wow-delay="0.2s">
+        <iframe src="https://www.google.com/maps?q=30.7046,76.7179&hl=en&z=15&output=embed" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+
+    </div>
+</div>
